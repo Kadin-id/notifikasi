@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifikasi Perpanjangan Keanggotaan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .notification {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        .notification-header {
+            margin-bottom: 20px;
+        }
+        .notification-header img {
+            max-width: 150px;
+            height: auto;
+        }
+        .notification h2 {
+            color: #333;
+        }
+        .notification p {
+            color: #555;
+        }
+        .notification .time {
+            font-weight: bold;
+            color: #d9534f; /* Merah */
+        }
+        .notification .button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #5bc0de; /* Biru */
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .notification .button:hover {
+            background-color: #31b0d5;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification">
+        <div class="notification-header">
+            <img src="https://kadin.id/wp-content/uploads/Kadin-Logo-tanpa-text-1.png" alt="Kadin Indonesia Logo">
+        </div>
+        <h2>Notifikasi Perpanjangan Keanggotaan Kadin Indonesia</h2>
+        <p>Kami ingin mengingatkan Anda bahwa masa keanggotaan Anda di Kadin Indonesia akan berakhir dalam waktu:</p>
+        <p class="time" id="countdown"></p>
+        <a href="https://www.kadinindonesia.or.id/renew" class="button">Perpanjang Sekarang</a>
+    </div>
+
+    <script>
+        // Set waktu perpanjangan (contoh: 30 Agustus 2024)
+        const deadline = new Date("2024-08-30T23:59:59").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = deadline - now;
+
+            if (timeLeft <= 0) {
+                document.getElementById('countdown').innerHTML = 'Masa keanggotaan Anda telah berakhir.';
+                document.querySelector('.button').style.display = 'none';
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = 
+                `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+        }
+
+        // Update countdown setiap detik
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display countdown immediately
+    </script>
+</body>
+</html>
